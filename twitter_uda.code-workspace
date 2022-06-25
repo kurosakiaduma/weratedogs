@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.pythonPath" : "C:\\Users\\tevinaduma\\Documents\\code\\Python\\Projects\\CtB\\bs4ex\\python.exe",
+		"python.terminal.activateEnvironment": true,
+		"python.linting.pylintEnabled": true,
+		"python.condaPath":"C:\\Users\\tevinaduma\\anaconda3\\Scripts",
+		"terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+		"terminal.integrated.cwd": "${fileDirname}",
+		"terminal.integrated.shellArgs.windows": ["/K", "C\\Users\\tevinaduma\\anaconda3\\Scripts\\activate './bs4ex'"],
+		"python.terminal.executionInFileDir": true,
+		"notebook.output.textLineLimit": 3000,
+	},
+}
