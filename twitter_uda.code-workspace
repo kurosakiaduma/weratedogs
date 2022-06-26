@@ -14,5 +14,6 @@
 		"terminal.integrated.shellArgs.windows": ["/K", "C\\Users\\tevinaduma\\anaconda3\\Scripts\\activate './bs4ex'"],
 		"python.terminal.executionInFileDir": true,
 		"notebook.output.textLineLimit": 3000,
+		"files.autoSave": "afterDelay",
 	},
 }
