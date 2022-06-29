@@ -1,4 +1,4 @@
-# Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩
+# ![](img/uda.jpg) Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩
 
 ## Table of contents
 
