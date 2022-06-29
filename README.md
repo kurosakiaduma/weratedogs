@@ -28,7 +28,7 @@
         - [Favorites](#favorites)
         - [Metrics aggregated over the years](#metrics-aggregated-over-the-years)
         - [2017 Metrics](#2017-metrics)
-      - [2016 Metrics](#2016-metrics)
+        - [2016 Metrics](#2016-metrics)
       - [Q3: What are the most used words on WRD?](#q3-what-are-the-most-used-words-on-wrd)
       - [Q4:Generally, what's the sentiment given off by WRD? Is it positive, neutral or negative? Is it subjective (personal and opinionated) or objective (factual)?](#q4generally-whats-the-sentiment-given-off-by-wrd-is-it-positive-neutral-or-negative-is-it-subjective-personal-and-opinionated-or-objective-factual)
     - [Limitations](#limitations)
