@@ -1,9 +1,7 @@
-<p align="center><img src ="img/uda.jpg"/>
+<p align="center"><img src ="img/uda.jpg"/>
 # Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩
 
 ## Table of contents
-
-- [Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩](#project-wrangling-weratedogs-enhanced-twitter-archive-)
   - [Description](#description)
     - [Hypotheses and Pre-EDA remarks](#hypotheses-and-pre-eda-remarks)
     - [Modules used in this notebook:](#modules-used-in-this-notebook)
