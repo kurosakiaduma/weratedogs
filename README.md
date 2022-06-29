@@ -1,4 +1,4 @@
-# ![](img/udacity.png) Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩
+# ![](img/udacity.png) Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩
 
 ## Table of contents 
   - [Description](#description)
