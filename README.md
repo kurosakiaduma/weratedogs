@@ -1,6 +1,6 @@
 # Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩
 
-## Table of contents
+## Table of contents ![](img/udacity.png)
   - [Description](#description)
     - [Hypotheses and Pre-EDA remarks](#hypotheses-and-pre-eda-remarks)
     - [Modules used in this notebook:](#modules-used-in-this-notebook)
