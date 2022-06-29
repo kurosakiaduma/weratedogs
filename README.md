@@ -1,4 +1,3 @@
-<p align="center"><img src ="img/uda.jpg"/>
 # Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩
 
 ## Table of contents
