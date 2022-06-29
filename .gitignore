@@ -160,4 +160,8 @@ cython_debug/
 #.idea/
 #
 # VSCode wworkspace
-  .code-workspace
+ *.code-workspace
+
+# Temporary gitignore files
+ *.gitignore~
+ *.un~

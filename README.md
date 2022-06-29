@@ -1,6 +1,6 @@
-# ![](img/udacity.png) Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩
+# ![uda-logo](img/udacity.png) Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶
+# Table of contents
 
-## Table of contents 
   - [Description](#description)
     - [Hypotheses and Pre-EDA remarks](#hypotheses-and-pre-eda-remarks)
     - [Modules used in this notebook:](#modules-used-in-this-notebook)
@@ -18,20 +18,19 @@
       - [**`df_tw_data` dataset**](#df_tw_data-dataset)
       - [`df_copy_img`](#df_copy_img)
       - [`df_copy_master`](#df_copy_master)
-   - [Exploratory Data Analysis](#exploratory-data-analysis)
-      - [Q1: Which dogs breeds have been awarded the highest ratings?](#q1-which-dogs-breeds-have-been-awarded-the-highest-ratings)
-        - [Ratings](#ratings)
-      - [Q2: Which dog breeds have attracted the most engagement on WRD over the time period in question (2015-2017)?](#q2-which-dog-breeds-have-attracted-the-most-engagement-on-wrd-over-the-time-period-in-question-2015-2017)
-        - [Retweets](#retweets)
-        - [Favorites](#favorites)
+  - [Exploratory Data Analysis](#exploratory-data-analysis)
+    - [Q1: Which dogs breeds have been awarded the highest ratings?](#q1-which-dogs-breeds-have-been-awarded-the-highest-ratings)
+      - [Ratings](#ratings)
+    - [Q2: Which dog breeds have attracted the most engagement on WRD over the time period in question (2015-2017)?](#q2-which-dog-breeds-have-attracted-the-most-engagement-on-wrd-over-the-time-period-in-question-2015-2017)
+      - [Retweets](#retweets)
+      - [Favorites](#favorites)
         - [Metrics aggregated over the years](#metrics-aggregated-over-the-years)
-        - [2017 Metrics](#2017-metrics)
-        - [2016 Metrics](#2016-metrics)
-      - [Q3: What are the most used words on WRD?](#q3-what-are-the-most-used-words-on-wrd)
-      - [Q4: Generally, what's the sentiment given off by WRD? Is it positive, neutral or negative? Is it subjective i.e. personal and opinionated, or objective i.e. factual?](#q4generally-whats-the-sentiment-given-off-by-wrd-is-it-positive-neutral-or-negative-is-it-subjective-personal-and-opinionated-or-objective-factual) 
-	- [Limitations](#limitations)
-	- [References](#references)
-
+      - [2017 Metrics](#2017-metrics)
+      - [2016 Metrics](#2016-metrics)
+    - [Q3: What are the most used words on WRD?](#q3-what-are-the-most-used-words-on-wrd)
+    - [Q4: Generally, what's the sentiment given off by WRD? Is it positive, neutral or negative? Is it subjective (personal and opinionated) or objective (factual)?](#q4-generally-whats-the-sentiment-given-off-by-wrd-is-it-positive-neutral-or-negative-is-it-subjective-personal-and-opinionated-or-objective-factual)
+  - [Limitations](#limitations)
+  - [References](#references)
 ## Description
 ><hr>
 > <a href='www.twitter.com/dog_rates'>WeRateDogs</a> (later referred to as <b>WRD</b> in this document) is a Twitter account, created by Matt Nelson, that rates people's dogs with a humorous comment about the dog. These ratings almost always have a denominator of 10. The numerators, though? Almost always greater than 10. 11/10, 12/10, 13/10, etc. Why? Because <a href="https://knowyourmeme.com/memes/theyre-good-dogs-brent">"they're good dogs Brent"</a>. WRD has over 9 million followers and has received international media coverage.
@@ -69,6 +68,7 @@
 >* `re`
 >* `_json`
 >* `os`
+>* `unittest`
 >
 > You can install them using `requirements.txt` file or `environment.yml` file in the `dependencies`. Run either one of these at the root of your project depending on your environment manager:
 > * Pip: `pip install -r dependencies/requirements.txt`
@@ -2906,6 +2906,7 @@ df_copy_arch.drop(columns=['in_reply_to_status_id', 'in_reply_to_user_id','retwe
 ```
 
 ##### Test
+> I will conduct assertion tests to confirm none of the dropped columns are in the dataframe
 
 
 ```python
@@ -3261,7 +3262,8 @@ getdogStage(df_copy_arch)
 
 
 
-> ##### Test
+##### Test
+> I will conduct assertion tests to confirm none of the dropped columns are in the dataframe
 
 
 ```python
@@ -3312,8 +3314,6 @@ def getSource(x):
 
     return x
 ```
-
-> ##### Test
 
 
 ```python
@@ -3480,6 +3480,9 @@ getSource(df_copy_arch)
 
 
 
+##### Test
+> I will conduct assertion tests to confirm none of masked values columns are still in the `source` column
+
 
 ```python
 assert '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>' not in df_copy_arch.source
@@ -3562,6 +3565,7 @@ df_copy_arch.timestamp = pd.to_datetime(df_copy_arch.timestamp, yearfirst=True, 
 >* I now convert them using `to_datetime()` with the `yearfirst` parameter set to `True` and for the rest of the timestamps to infer their formats fromt he first successfully converted `timestamp`
 
 ##### Test
+> I will use Pandas' `is_datetime64_ns_dtype` assertion test to confirm none of the dropped columns are in the dataframe
 
 
 ```python
@@ -3655,6 +3659,7 @@ for i in range(0, len(df_copy_arch)):
     
 
 ##### Test
+> I will use the `unittest` module's `assertRegex` method to confirm the values in the rating_numerator` are either one or at most 2
 
 
 ```python
@@ -3778,6 +3783,7 @@ df_copy_arch = pd.DataFrame(df_copy_arch[['tweet_id', 'name', 'dog_stage', 'rati
 ```
 
 ##### Test
+> I use Pandas' `testing.assert_frame_equal` method to assert both dataframes are of the same size
 
 
 ```python
@@ -3820,6 +3826,7 @@ df_copy_master = pd.merge(df_copy_arch, df_copy_data, how='outer', on='tweet_id'
 ```
 
 ##### Test
+> I use Pandas' `testing.assert_frame_equal` method to assert both dataframes are of the same size
 
 
 ```python
@@ -3866,6 +3873,7 @@ df_copy_img.drop(columns=['jpg_url', 'img_num','p1_conf', 'p2','p2_conf', 'p2_do
 ```
 
 ##### Test
+> I assert that the dropped columns are not in the dataframe
 
 
 ```python
@@ -3896,6 +3904,7 @@ df_copy_img = pd.DataFrame(df_copy_img[df_copy_img.p1_dog == True])
 ```
 
 ##### Test
+> I use Pandas' `testing.assert_frame_equal` method to assert both dataframes are of the same size
 
 
 ```python
@@ -3917,10 +3926,11 @@ df_copy_img.drop(columns='p1_dog', inplace=True)
 ```
 
 ##### Test
+> I assert the dropped columns are not in the dataframe
 
 
 ```python
-assert('p1_dog' not in df_copy_img.columns)
+assert 'p1_dog' not in df_copy_img.columns
 ```
 
 > * I have succesfully gotten rid ofthis column 🙂
@@ -3943,6 +3953,7 @@ df_copy_master_beta = pd.merge(df_copy_master ,df_copy_img, how='outer', on='twe
 ```
 
 ##### Test
+> I use Pandas' `testing.assert_frame_equal` method to assert both dataframes are of the same size
 
 
 ```python
@@ -4266,6 +4277,7 @@ df_copy_master.dog_breed = df_copy_master.dog_breed.apply(formatString)
 ```
 
 ##### Test
+> I run a check to confirm that all the values in the `dog_breed` column do not have any underscores
 
 
 ```python
@@ -4576,10 +4588,12 @@ df_copy_master.favorite_count.fillna(mean_ftw, inplace=True)
 ```
 
 ##### Test
+> I run assertion checks using `unnitests's` `assertIsNotNone` to confirm there are no null values in the `favorite_count` and `retweet_count` columns
 
 
 ```python
-df_copy_master[df_copy_master.favorite_count.isna()]
+t = unittest.TestCase()
+t.assertIsNotNone(df_copy_master.favorite_count)
 ```
 
 
@@ -4626,50 +4640,9 @@ df_copy_master[df_copy_master.favorite_count.isna()]
 
 
 ```python
-df_copy_master[df_copy_master.retweet_count.isna()]
+t = unittest.TestCase()
+t.assertIsNotNone(df_copy_master.retweet_count)
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>tweet_id</th>
-      <th>name</th>
-      <th>dog_stage</th>
-      <th>rating_numerator</th>
-      <th>text</th>
-      <th>source</th>
-      <th>timestamp</th>
-      <th>retweet_count</th>
-      <th>favorite_count</th>
-      <th>geo_data</th>
-      <th>lang_data</th>
-      <th>dog_breed</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
-
-
 
 > * Success! There aren't any null values in our retweets and favorites count columns
 
@@ -5014,6 +4987,7 @@ print(allWords)
     
 
 ##### Test
+> I will perform unittests with `assertNotRegex method` to ensure checks pass for my regex clean up code
 
 
 ```python
@@ -5074,20 +5048,20 @@ for i in range(0, len(df_copy_arch)):
 > * Here's our dataset `text` data, fully cleaned of any of the obscenities we did not require in our texts 🥂🙂
 <hr>
 
-> * I feel that I have cleaned all of the datasets and translated them into a master set that will be efficient for my analysis.
->
-> * I can proceed to copy my dataset into the _real_ **master** dataset that Iwill be using for Exploratory Data Analysis.
+> * I feel that I have cleaned all of the datasets and translated them into a master set that will be efficient for my analysis. I can proceed to copy my dataset into the _real_ **master** dataset that I will be using for Exploratory Data Analysis. I will save this data into a file called `twitter-archive-master.csv`
 
 
 ```python
 df_master = df_copy_master.copy()
+
+df_master.to_csv('data/twitter-archive-master.csv')
 ```
 
 <hr>
 
-### Exploratory Data Analysis
+## Exploratory Data Analysis
 
-#### Q1: Which dogs breeds have been awarded the highest ratings?
+### Q1: Which dogs breeds have been awarded the highest ratings?
 >
 > I attempt to investigate how WRD has awarded ratings by dog breeds. I will use the `dog_breed` column to aggregate mean values for all the species and plot visualizations to this effect. 
 
@@ -5425,7 +5399,7 @@ df_agg_stats.describe()
 
 > * For the ratings, I will create a separate dataframe and sort them in descending order.
 
-##### Ratings
+#### Ratings
 
 
 ```python
@@ -5597,8 +5571,7 @@ df_ratings.tail(10)
 > Inferences:
 > 1. The Clumber despite being the only 1 on our dataset holds the top spot for the highest average rating.
 > 1. Terriers, Pyrennes, Borzoi and the Husky are pretty popular dogs.
-> 1.
-> 1.  
+> 1. The Japanese Spaniel is the lowest ranked dog breed on WRD.
 
 
 ```python
@@ -5646,14 +5619,14 @@ Inference
 > * If you're have an owner of a Clumber, a Terrier or Great Pyrenees, chances are WRD would rate your dog pretty highly were you to submit a photo to their account.
 <hr>
 
-#### Q2: Which dog breeds have attracted the most engagement on WRD over the time period in question (2015-2017)?
+### Q2: Which dog breeds have attracted the most engagement on WRD over the time period in question (2015-2017)?
 
 > I will visualize the engagements by two spectrums: 
 > * Retweets 🔁
 > * Favorites ❤️
 <hr>
 
-##### Retweets
+#### Retweets
 
 > * As done before with the ratings,I will create a separate dataframe for the retweets count sorted in descending order. 
 
@@ -5825,8 +5798,7 @@ df_retweets.tail(10)
 > Inferences:
 > 1. The Standard Poodle has gained the most impressions on Twitter. 
 > 1. Terriers and Retrievers also made the list fo top impressions on Twitter.
-> 1. 
-> 1. 
+> 1. The Standard Schnauzer, Scottish Deerhound, Entlebucher, Japanese Spaniel and Groenendael are the least impressionable dogs on WRD.
 
 
 ```python
@@ -5871,7 +5843,7 @@ Inferences:
 > * The Standard Poodle is outrightly the most impressionable dog on WRD so far.
 <hr>
 
-##### Favorites
+#### Favorites
 
 
 ```python
@@ -6041,8 +6013,7 @@ df_favorites.tail(10)
 > Inferences:
 > 1. The Saluki, black-and-tan Coonhound, French Bulldog and the flat-coated Retriever are the most liked dogs 
 > 1. Poodles and Retrievers are generally very likeable and rather impressionable dogs.
-> 1.
-> 1.
+> 1. The Japanese Spaniel is the leas liked dog on WRD.
 
 
 ```python
@@ -6093,7 +6064,7 @@ if (outputEl) {{
 > * I will query them into three separate datasets from 2015 to 2017 and aggregate them as I did for a general view above.
 <hr>
 
-##### 2017 Metrics
+#### 2017 Metrics
 <hr>
 
 
@@ -6757,7 +6728,7 @@ if (outputEl) {{
 > * The American Staffordshire Terrier, Dandie Dinmont, Briard and Gordon Setter gain the fewest impressions as per WRD's metrics. 
 <hr>
 
-##### 2016 Metrics
+#### 2016 Metrics
 <hr>
 
 
@@ -7427,7 +7398,7 @@ if (outputEl) {{
 > * The Ibizan hound, Australian Terrier, Border Terrier, Cairn and Groenendael	**gained the least popularity in WRD's audience in 2016**
 <hr>
 
-#### Q3: What are the most used words on WRD?
+### Q3: What are the most used words on WRD?
 > Word Clouds (also known as wordle, word collage, or tag cloud) are visual representations of words that give greater prominence to words that appear more frequently.
 > The goal is to understand how WRD's author and audience feel about a dogs and topics revolving around dogs.
 > I will use the cleaned text to figure this out in addition to Python's WordCloud library
@@ -7597,11 +7568,11 @@ if (outputEl) {{
 
 
 > Inferences:
-> * The most commonly used words on WRD are "pupper", "Meet", "happy", "h*ckin", 
-> *
+> * The most commonly used words on WRD are "pupper", "Meet", "happy", "h*ckin", "doggo", "pup" etc
+> * Generally, a lot of positive words are used on WRD's Twitter. 
 <hr>
 
-#### Q4:Generally, what's the sentiment given off by WRD? Is it positive, neutral or negative? Is it subjective (personal and opinionated) or objective (factual)?
+### Q4: Generally, what's the sentiment given off by WRD? Is it positive, neutral or negative? Is it subjective (personal and opinionated) or objective (factual)?
 > I will use a binary classifier using the Twitter data to detect the sentiment of each tweet. The input data is the text and the library in use will be Python's TextBlob.
 >
 > I will get the score of each tweet's polarity. Polarity is the output that lies between [-1,1], where -1 refers to negative sentiment and +1 refers to positive sentiment.
@@ -7920,16 +7891,14 @@ if (outputEl) {{
 > Inferences:
 > * **The scatter is more skewed to the right. This confirms that WRD is generally a positive account** 
 
-### Limitations
+## Limitations
 > * A number of predictions from the neural network seemed to have been inaccurate going by the descriptions given in the tweet texts.
 > * A few tweets had since been deleted from 2015 and so I couldn't get the exact number of favorites and retweets for those tweets.
 > * The `Name` column was marred with inaccuracies making it pretty hard to even come up with a model for generating analyses on dog names with the highest ratings.
 
 
-### References
+## References
 > * <a href="https://en.wikipedia.org/wiki/WeRateDogs">WeRateDogs Twitter</a>
 > * <a href="https://stackoverflow.com/questions/28596493/asserting-columns-data-type-in-pandas">Asserting column(s) data type in Pandas</a>
 > * <a href="https://pandas.pydata.org/docs/reference/api/pandas.api.types.is_datetime64_ns_dtype.html">Check whether the provided array or dtype is of the datetime64[ns] dtype</a>
 > * <a href="https://www.red-gate.com/simple-talk/development/data-science-development/sentiment-analysis-python/">Sentiment Analysis with Python</a>
-
-
