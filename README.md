@@ -1,5 +1,90 @@
 # Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩
 
+## Table of contents
+
+- [Project: Wrangling WeRateDogs' Enhanced Twitter Archive 🐶🐕🐕‍🦺🐩](#project-wrangling-weratedogs-enhanced-twitter-archive-)
+  - [Description](#description)
+    - [Hypotheses and Pre-EDA remarks](#hypotheses-and-pre-eda-remarks)
+    - [Modules used in this notebook:](#modules-used-in-this-notebook)
+  - [Data Wrangling](#data-wrangling)
+    - [Gather](#gather)
+      - [**`twitter-archive-enhanced` table**](#twitter-archive-enhanced-table)
+      - [**`image-predictions` table**](#image-predictions-table)
+      - [**Obtaining additional tweet data from `Twitter API` using Python's `Tweepy`** module](#obtaining-additional-tweet-data-from-twitter-api-using-pythons-tweepy-module)
+    - [Assess](#assess)
+      - [**`df_tw_arch`**](#df_tw_arch)
+        - [Visual Assessment](#visual-assessment)
+        - [Programmatic Assessment](#programmatic-assessment)
+- [Column                      Non-Null Count  Dtype](#column----------------------non-null-count--dtype)
+      - [**`df_tw_data`**](#df_tw_data)
+        - [Visual Assessment](#visual-assessment)
+- [Column          Non-Null Count  Dtype](#column----------non-null-count--dtype)
+      - [**`df_image_pred`**](#df_image_pred)
+        - [Visual Assessment](#visual-assessment)
+- [Column    Non-Null Count  Dtype](#column----non-null-count--dtype)
+    - [Clean](#clean)
+      - [`df_tw_arch`](#df_tw_arch)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+        - [Define](#define)
+        - [Code](#code)
+        - [Define](#define)
+        - [Code](#code)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+      - [**`df_tw_data` dataset**](#df_tw_data-dataset)
+        - [Define](#define)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+      - [`df_copy_img`](#df_copy_img)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+      - [`df_copy_master`](#df_copy_master)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+        - [Define](#define)
+        - [Code](#code)
+        - [Test](#test)
+    - [Exploratory Data Analysis](#exploratory-data-analysis)
+      - [Q1: Which dogs breeds have been awarded the highest ratings?](#q1-which-dogs-breeds-have-been-awarded-the-highest-ratings)
+        - [Ratings](#ratings)
+      - [Q2: Which dog breeds have attracted the most engagement on WRD over the time period in question (2015-2017)?](#q2-which-dog-breeds-have-attracted-the-most-engagement-on-wrd-over-the-time-period-in-question-2015-2017)
+        - [Retweets](#retweets)
+        - [Favorites](#favorites)
+        - [Metrics aggregated over the years](#metrics-aggregated-over-the-years)
+        - [2017 Metrics](#2017-metrics)
+      - [2016 Metrics](#2016-metrics)
+      - [Q3: What are the most used words on WRD?](#q3-what-are-the-most-used-words-on-wrd)
+      - [Q4:Generally, what's the sentiment given off by WRD? Is it positive, neutral or negative? Is it subjective (personal and opinionated) or objective (factual)?](#q4generally-whats-the-sentiment-given-off-by-wrd-is-it-positive-neutral-or-negative-is-it-subjective-personal-and-opinionated-or-objective-factual)
+    - [Limitations](#limitations)
+    - [References](#references)
+
 ## Description
 ><hr>
 > <a href='www.twitter.com/dog_rates'>WeRateDogs</a> (later referred to as <b>WRD</b> in this document) is a Twitter account, created by Matt Nelson, that rates people's dogs with a humorous comment about the dog. These ratings almost always have a denominator of 10. The numerators, though? Almost always greater than 10. 11/10, 12/10, 13/10, etc. Why? Because <a href="https://knowyourmeme.com/memes/theyre-good-dogs-brent">"they're good dogs Brent"</a>. WRD has over 9 million followers and has received international media coverage.
@@ -37,7 +122,6 @@
 >* `re`
 >* `_json`
 >* `os`
->* `unittest`
 >
 > You can install them using `requirements.txt` file or `environment.yml` file in the `dependencies`. Run either one of these at the root of your project depending on your environment manager:
 > * Pip: `pip install -r dependencies/requirements.txt`
@@ -2875,7 +2959,6 @@ df_copy_arch.drop(columns=['in_reply_to_status_id', 'in_reply_to_user_id','retwe
 ```
 
 ##### Test
-> I will conduct assertion tests to confirm none of the dropped columns are in the dataframe
 
 
 ```python
@@ -3231,8 +3314,7 @@ getdogStage(df_copy_arch)
 
 
 
-##### Test
-> I will conduct assertion tests to confirm none of the dropped columns are in the dataframe
+> ##### Test
 
 
 ```python
@@ -3283,6 +3365,8 @@ def getSource(x):
 
     return x
 ```
+
+> ##### Test
 
 
 ```python
@@ -3449,9 +3533,6 @@ getSource(df_copy_arch)
 
 
 
-##### Test
-> I will conduct assertion tests to confirm none of masked values columns are still in the `source` column
-
 
 ```python
 assert '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>' not in df_copy_arch.source
@@ -3534,7 +3615,6 @@ df_copy_arch.timestamp = pd.to_datetime(df_copy_arch.timestamp, yearfirst=True, 
 >* I now convert them using `to_datetime()` with the `yearfirst` parameter set to `True` and for the rest of the timestamps to infer their formats fromt he first successfully converted `timestamp`
 
 ##### Test
-> I will use Pandas' `is_datetime64_ns_dtype` assertion test to confirm none of the dropped columns are in the dataframe
 
 
 ```python
@@ -3628,7 +3708,6 @@ for i in range(0, len(df_copy_arch)):
     
 
 ##### Test
-> I will use the `unittest` module's `assertRegex` method to confirm the values in the rating_numerator` are either one or at most 2
 
 
 ```python
@@ -3752,7 +3831,6 @@ df_copy_arch = pd.DataFrame(df_copy_arch[['tweet_id', 'name', 'dog_stage', 'rati
 ```
 
 ##### Test
-> I use Pandas' `testing.assert_frame_equal` method to assert both dataframes are of the same size
 
 
 ```python
@@ -3795,7 +3873,6 @@ df_copy_master = pd.merge(df_copy_arch, df_copy_data, how='outer', on='tweet_id'
 ```
 
 ##### Test
-> I use Pandas' `testing.assert_frame_equal` method to assert both dataframes are of the same size
 
 
 ```python
@@ -3842,7 +3919,6 @@ df_copy_img.drop(columns=['jpg_url', 'img_num','p1_conf', 'p2','p2_conf', 'p2_do
 ```
 
 ##### Test
-> I assert that the dropped columns are not in the dataframe
 
 
 ```python
@@ -3873,7 +3949,6 @@ df_copy_img = pd.DataFrame(df_copy_img[df_copy_img.p1_dog == True])
 ```
 
 ##### Test
-> I use Pandas' `testing.assert_frame_equal` method to assert both dataframes are of the same size
 
 
 ```python
@@ -3895,11 +3970,10 @@ df_copy_img.drop(columns='p1_dog', inplace=True)
 ```
 
 ##### Test
-> I assert the dropped columns are not in the dataframe
 
 
 ```python
-assert 'p1_dog' not in df_copy_img.columns
+assert('p1_dog' not in df_copy_img.columns)
 ```
 
 > * I have succesfully gotten rid ofthis column 🙂
@@ -3922,7 +3996,6 @@ df_copy_master_beta = pd.merge(df_copy_master ,df_copy_img, how='outer', on='twe
 ```
 
 ##### Test
-> I use Pandas' `testing.assert_frame_equal` method to assert both dataframes are of the same size
 
 
 ```python
@@ -4246,7 +4319,6 @@ df_copy_master.dog_breed = df_copy_master.dog_breed.apply(formatString)
 ```
 
 ##### Test
-> I run a check to confirm that all the values in the `dog_breed` column do not have any underscores
 
 
 ```python
@@ -4557,12 +4629,10 @@ df_copy_master.favorite_count.fillna(mean_ftw, inplace=True)
 ```
 
 ##### Test
-> I run assertion checks using `unnitests's` `assertIsNotNone` to confirm there are no null values in the `favorite_count` and `retweet_count` columns
 
 
 ```python
-t = unittest.TestCase()
-t.assertIsNotNone(df_copy_master.favorite_count)
+df_copy_master[df_copy_master.favorite_count.isna()]
 ```
 
 
@@ -4609,9 +4679,50 @@ t.assertIsNotNone(df_copy_master.favorite_count)
 
 
 ```python
-t = unittest.TestCase()
-t.assertIsNotNone(df_copy_master.retweet_count)
+df_copy_master[df_copy_master.retweet_count.isna()]
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tweet_id</th>
+      <th>name</th>
+      <th>dog_stage</th>
+      <th>rating_numerator</th>
+      <th>text</th>
+      <th>source</th>
+      <th>timestamp</th>
+      <th>retweet_count</th>
+      <th>favorite_count</th>
+      <th>geo_data</th>
+      <th>lang_data</th>
+      <th>dog_breed</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+
 
 > * Success! There aren't any null values in our retweets and favorites count columns
 
@@ -4956,11 +5067,10 @@ print(allWords)
     
 
 ##### Test
-> I will perform unittests with `assertNotRegex method` to ensure checks pass for my regex clean up code
 
 
 ```python
- t = unittest.TestCase()
+t = unittest.TestCase()
 for i in range(0, len(df_copy_arch)):
     t.assertNotRegex(df_copy_arch.text[i], r'@[A-Za-z0-9]+')
     
@@ -6700,7 +6810,7 @@ if (outputEl) {{
 > * The American Staffordshire Terrier, Dandie Dinmont, Briard and Gordon Setter gain the fewest impressions as per WRD's metrics. 
 <hr>
 
-#### 2016 Metrics
+##### 2016 Metrics
 <hr>
 
 
@@ -7370,7 +7480,7 @@ if (outputEl) {{
 > * The Ibizan hound, Australian Terrier, Border Terrier, Cairn and Groenendael	**gained the least popularity in WRD's audience in 2016**
 <hr>
 
-### Q3: What are the most used words on WRD?
+#### Q3: What are the most used words on WRD?
 > Word Clouds (also known as wordle, word collage, or tag cloud) are visual representations of words that give greater prominence to words that appear more frequently.
 > The goal is to understand how WRD's author and audience feel about a dogs and topics revolving around dogs.
 > I will use the cleaned text to figure this out in addition to Python's WordCloud library
@@ -7544,7 +7654,7 @@ if (outputEl) {{
 > *
 <hr>
 
-### Q4:Generally, what's the sentiment given off by WRD? Is it positive, neutral or negative? Is it subjective (personal and opinionated) or objective (factual)?
+#### Q4:Generally, what's the sentiment given off by WRD? Is it positive, neutral or negative? Is it subjective (personal and opinionated) or objective (factual)?
 > I will use a binary classifier using the Twitter data to detect the sentiment of each tweet. The input data is the text and the library in use will be Python's TextBlob.
 >
 > I will get the score of each tweet's polarity. Polarity is the output that lies between [-1,1], where -1 refers to negative sentiment and +1 refers to positive sentiment.
