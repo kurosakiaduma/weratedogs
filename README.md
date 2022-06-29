@@ -20,7 +20,7 @@
       - [**`df_tw_data` dataset**](#df_tw_data-dataset)
       - [`df_copy_img`](#df_copy_img)
       - [`df_copy_master`](#df_copy_master)
-    - [Exploratory Data Analysis](#exploratory-data-analysis)
+   - [Exploratory Data Analysis](#exploratory-data-analysis)
       - [Q1: Which dogs breeds have been awarded the highest ratings?](#q1-which-dogs-breeds-have-been-awarded-the-highest-ratings)
         - [Ratings](#ratings)
       - [Q2: Which dog breeds have attracted the most engagement on WRD over the time period in question (2015-2017)?](#q2-which-dog-breeds-have-attracted-the-most-engagement-on-wrd-over-the-time-period-in-question-2015-2017)
