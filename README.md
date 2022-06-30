@@ -34,7 +34,7 @@
       - [2017 WRD ratings](#2017-wrd-ratings)
       - [2017 Retweets](#2017-retweets)
       - [2017 Favorites](#2017-favorites)
-      - [2016 Metrics](#2016-metrics)
+    - [2016 Metrics](#2016-metrics)
       - [2016 Ratings](#2016-ratings)
       - [2016 Retweets](#2016-retweets)
       - [2016 Favorites](#2016-favorites)
